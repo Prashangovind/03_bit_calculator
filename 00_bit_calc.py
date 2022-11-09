@@ -16,6 +16,7 @@ def statement_generator(text, decoration):
     return ""
 
 
+# check user choice is 'integer', 'text' or 'image'
 def user_choice(): 
 
     # Lists of vaild reponses
@@ -53,6 +54,32 @@ def user_choice():
             print()
 
 
+# checks input is a number more than a given value
+def num_check(question, low):
+    valid = False
+    while not valid:
+
+        error = "Please enter an integer that is more than (or equal to) {}" .format(low)
+     
+        try:
+
+            # ask user to enter a number
+            response = int(input(question))
+
+            # checks that number is more than zero
+            if response >= low:
+                return response
+
+            # outputs error if inputs is invalid
+            else:
+                print(error)
+                print()
+
+        except ValueError:    
+            print(error)
+
+
+
 #Main routain goes here
 
 # Heading
@@ -68,7 +95,17 @@ while keep_going == "":
     data_type = user_choice()
     print("you chose", data_type)
 
-#for integers, ask for integer 
-# (must be an integer more than / epual to 0)
+    #for integers, ask for integer 
+    if data_type =="integer":
+        var_integer = num_check("Enter an integer: ", 0)
 
-# for image, ask for width and height 
+    # for image, ask for width and height 
+    # (must be an integer more than / epual to 1)
+    elif data_type == "image":
+        image_width == num_check("image width? ", 1)
+        print()
+        image_height = num_check("image height? ", 1)
+
+    # for text, ask for a stiring 
+    else:
+        var_text = input("Enter some text: ")
